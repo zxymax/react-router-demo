@@ -253,3 +253,45 @@ class Index extends Component {
   }
 }
 ```
+##### react-router 重定向 `Redirect` 使用
+- 标签式重定向：就是利用标签 `Redirect` 进行重定向，业务不复杂时，建议使用这种。
+- 编程式重定向：一般用于业务逻辑当中，比如登陆成功到会员中心页面。
+
+<span style="background-color:#A52A2A;color:#fff;">注意：重定向和跳转有一个重要的区别，就是跳转式可以用浏览器的返回按钮返回上一级，而重定向是不可以的。</span>
+
+##### 标签式重定向，一般不是用在很复杂的业务逻辑中 例如进入 Index.js 组件，直接重定向到 Home 组件
+创建 Home.js 组件
+```javascript
+import React, { Component } from 'react';
+
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return <h2>我是 Home 组件</h2>
+  }
+}
+
+export default Home;
+```
+##### 在 AppRouter.js 中添加 Route 配置，配置时引入 Home 组件
+```javascript
+import Home from './views/Home';
+<Route path='/home/' component={Home} />
+```
+更新 `Index.js` 组件，从 Index 组件重定向到 Home, 需要先引入 `Redirect`。
+```javascript
+import { Link, Redirect } from 'react-router-dom';
+```
+引入 `Redirect` 后，直接在 `render` 函数里使用即可。
+```javascript
+<Redirect to="/home/">
+```
+##### 编程式重定向，不再利用标签 Redirect，直接使用 JS 重定向，一般用在业务逻辑比较复杂的场景或需要多次判断的场景
+比如直接在构造函数里 `constructor` 加入重定向代码：
+```javascript
+this.props.history.push('/home/')
+```
+

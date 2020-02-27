@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Index extends Component {
   constructor(props) {
     super(props);
+    // this.props.history.push('/home/')
     this.state = {
       list: [
         { cid: 123, title: 'Jorna blog-1' },
@@ -15,6 +16,7 @@ class Index extends Component {
   render() {
     return (
       <Fragment>
+        <Redirect to="/home/" />
         <p>Jorna in here</p>
         <ul>
           {
